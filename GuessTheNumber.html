@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number Game</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0; /* Light background color */
+            font-family: 'Arial', sans-serif;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #333; /* Dark text color */
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ffffff; /* White background for the box */
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        input {
+            padding: 10px;
+            width: 280px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF; /* Blue button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        .status {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555; /* Gray text for status */
+        }
+    </style>
+</head>
+<body>
+    <h1>Guess the Number Game</h1>
+    <div class="container">
+        <p>Guess any number from 1 to 100</p>
+        <p>You have only 10 Attempts.</p>
+        <form id="guessForm">
+            <input type="number" id="guessInput" placeholder="Enter your guess" min="1" max="100" required>
+            <br>
+            <button type="submit">Submit Guess</button>
+            <div class="status">
+                <span>Your previous guesses: <span id="previousGuesses"></span></span><br>
+                <span>Guesses remaining: <span id="remainingGuesses">10</span></span>
+            </div>
+            <span id="correct"></span>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('guessForm');
+        const prev = document.getElementById('previousGuesses');
+        const rem = document.getElementById('remainingGuesses');
+        const msg = document.getElementById('correct');
+        const random = Math.floor(Math.random() * 100) + 1; 
+        let attemptsLeft = 10;
+        const array = [];
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const input = parseInt(document.getElementById('guessInput').value);
+            
+            if (input === random) {
+                msg.innerHTML = 'Yay! You guessed the right number!';
+            } else {
+                attemptsLeft--; 
+                rem.innerHTML = attemptsLeft;
+                msg.innerHTML = 'Oops! Please try again.';
+
+                array.push(input);
+                prev.innerHTML = array.join(', '); 
+
+                if (attemptsLeft === 0) {
+                    msg.innerHTML = 'Game Over! The correct number was ' + random;
+                    document.getElementById('guessInput').disabled = true; // Disable input after game over
+                }
+            }
+            
+            document.getElementById('guessInput').value = '';
+        });
+    </script>
+</body>
+</html>
