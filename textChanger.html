@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Heading</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f4f8;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        h1 {
+            font-size: 64px;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(90deg, rgba(255,87,34,1) 0%, rgba(63,81,181,1) 100%);
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            animation: glow 1.5s infinite ease-in-out;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 20px rgba(255, 87, 34, 0.8), 0 0 30px rgba(63, 81, 181, 0.8);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(255, 87, 34, 1), 0 0 40px rgba(63, 81, 181, 1);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(255, 87, 34, 0.8), 0 0 30px rgba(63, 81, 181, 0.8);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Beautiful Heading</h1>
+    <button id="stop">Stop Timer</button>
+
+    <script>
+        const head = function() {
+            document.querySelector('h1').innerHTML = "Naya text aa gya...";
+        };
+
+        const timerID = setTimeout(head, 3000);
+
+        const stop = document.getElementById('stop');
+        stop.addEventListener('click', function() {
+            clearTimeout(timerID);
+        });
+    </script>
+</body>
+</html>
