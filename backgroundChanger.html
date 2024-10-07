@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Color Changer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s ease;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #333;
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            letter-spacing: 3px;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            color: #fff;
+        }
+
+        #start {
+            background-color: #28a745;
+        }
+
+        #start:hover {
+            background-color: #218838;
+        }
+
+        #stop {
+            background-color: #dc3545;
+        }
+
+        #stop:hover {
+            background-color: #c82333;
+        }
+
+        .shadow {
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>Background Color Changer</h1>
+    <div class="button-container">
+        <button id="start" class="shadow">Start</button>
+        <button id="stop" class="shadow">Stop</button>
+    </div>
+
+    <script>
+        const start = document.getElementById('start')
+        const stop = document.getElementById('stop')
+        let change
+
+        start.addEventListener('click', function(){
+
+            if (change) {
+                clearInterval(change);
+            }
+
+            change = setInterval(function(){
+                let color = "#"
+                for(let i=0;i<6;i++)color += Math.floor(Math.random() * 16).toString(16);
+                document.querySelector('body').style.backgroundColor = color
+            },1000)
+        })
+
+        stop.addEventListener('click',function(){
+            clearInterval(change)
+            change = null
+        })
+    </script>
+</body>
+</html>
